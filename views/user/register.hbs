@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="/styles/userLogin.css">
+<div class="login">
+    <h1>Register</h1>
+    <form method="post" id="reg" action="/user/register">
+    <div type="text" id="checkMsg" data-message={{message}} ></div>
+        <input id="email" name="email" placeholder="EMAIL" />
+        <input id="password" type="password" name="password" placeholder="Password" />
+        <input id="confirmpassword" type="password" name="confirmpassword" placeholder="Confirm Password" />
+        <button type="submit" class="btn btn-primary btn-block btn-large">Sign in</button>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script>
+
+    document.getElementById("reg").addEventListener("submit", function formValidation(e) {
+
+        e.preventDefault();
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+        var confirmpassword = document.getElementById("confirmpassword").value;
+
+        if (email === "" || password === "" || confirmpassword === "") {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "All fields are required!",
+                footer: '<a href="#">Why do I have this issue?</a>'
+            });
+            return false;
+        } else if (password != confirmpassword) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Passwords are not same!",
+                footer: '<a href="#">Why do I have this issue?</a>'
+            });
+            return false;
+        }
+        e.target.submit();
+    })
+
+</script>
+
+<script>
+    const msg= document.getElementById("checkMsg").dataset.message;
+    if(msg && msg!= "null"){
+         Swal.fire({
+            icon: "success",
+            title: "User already exist",
+            text: msg,
+            timer: 2000,
+            showConfirmButton: false
+        });
+    }
+</script>

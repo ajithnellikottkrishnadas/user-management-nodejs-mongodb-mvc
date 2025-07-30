@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="/styles/userLogin.css">
+<div class="login">
+    <h1>Login</h1>
+    <form method="post">
+        <div type="text" id="checkMsg2" data-message={{message}} ></div>
+        <input type="text" name="u" placeholder="Username" required="required" />
+        <input type="password" name="p" placeholder="Password" required="required" />
+        <button type="submit" class="btn btn-primary btn-block btn-large">Let me in.</button>
+        <div class="link">
+            <div><a href="">Forgot password</a></div>
+            <div><a href="">Do you have an Account</a></div>
+        </div>
+    </form>
+</div>
+
+
+    <script>
+    const msg= document.getElementById("checkMsg2").dataset.message;
+    if(msg && msg!= "null"){
+         Swal.fire({
+            icon: "success",
+            title: "Registration Successful",
+            text: msg,
+            timer: 2000,
+            showConfirmButton: false
+        });
+    }
+</script>
