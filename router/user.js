@@ -1,15 +1,13 @@
 import express from "express";
-import registerUser from "../controller/userController.js";
+import {registerUser,loadLogin,loadRegister,login} from "../controller/userController.js";
 
 const router= express.Router();
 
-router.get("/login",(req,res)=>{
-    res.render("user/login")
-});
+router.get("/login",loadLogin);
 
-router.get("/register",(req,res)=>{
-    res.render("user/register")
-})
+router.post("/login",login)
+
+router.get("/register",loadRegister)
 
 router.post("/register",registerUser)
 

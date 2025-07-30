@@ -1,11 +1,11 @@
 <link rel="stylesheet" href="/styles/userLogin.css">
 <div class="login">
     <h1>Login</h1>
-    <form method="post">
-        <div type="text" id="checkMsg2" data-message={{message}} ></div>
-        <input type="text" name="u" placeholder="Username" required="required" />
-        <input type="password" name="p" placeholder="Password" required="required" />
-        <button type="submit" class="btn btn-primary btn-block btn-large">Let me in.</button>
+    <form id="log" method="post" action="/user/login">
+        <div type="text" id="checkMsg3" data-message="{{message}}"></div>
+        <input type="text" name="email" id="email" placeholder="Email" required="required" />
+        <input type="password" name="password" id="password" placeholder="Password" required="required" />
+        <button type="submit" class="btn btn-primary btn-block btn-large">Login</button>
         <div class="link">
             <div><a href="">Forgot password</a></div>
             <div><a href="">Do you have an Account</a></div>
@@ -14,15 +14,51 @@
 </div>
 
 
-    <script>
-    const msg= document.getElementById("checkMsg2").dataset.message;
-    if(msg && msg!= "null"){
-         Swal.fire({
+<script>
+    const msg = document.getElementById("checkMsg3").dataset.message;
+    if (msg && msg != "null" && msg==="user created successfully" ) {
+        Swal.fire({
             icon: "success",
             title: "Registration Successful",
             text: msg,
             timer: 2000,
             showConfirmButton: false
         });
+    }else if (msg && msg != "null" && msg==="password incorrect" ) {
+        Swal.fire({
+            icon: "success",
+            title: "Went wrong",
+            text: msg,
+            timer: 2000,
+            showConfirmButton: false
+        });
+    }else if (msg && msg != "null" && msg==="login successfull" ) {
+        Swal.fire({
+            icon: "success",
+            title: "login successfull",
+            text: msg,
+            timer: 2000,
+            showConfirmButton: false
+        });
     }
+</script>
+
+<script>
+
+    document.getElementById("log").addEventListener("submit", function formValidation(e) {
+
+        e.preventDefault();
+       
+        if (email === "" || password === "" ) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "All fields are required!",
+                footer: '<a href="#">Why do I have this issue?</a>'
+            });
+            return false;
+        }
+        e.target.submit();
+    })
+
 </script>

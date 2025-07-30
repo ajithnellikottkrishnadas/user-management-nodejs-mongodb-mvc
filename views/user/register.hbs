@@ -2,7 +2,7 @@
 <div class="login">
     <h1>Register</h1>
     <form method="post" id="reg" action="/user/register">
-    <div type="text" id="checkMsg" data-message={{message}} ></div>
+        <div type="text" id="checkMsg" data-message="{{message}}"></div>
         <input id="email" name="email" placeholder="EMAIL" />
         <input id="password" type="password" name="password" placeholder="Password" />
         <input id="confirmpassword" type="password" name="confirmpassword" placeholder="Confirm Password" />
@@ -44,14 +44,13 @@
 </script>
 
 <script>
-    const msg= document.getElementById("checkMsg").dataset.message;
-    if(msg && msg!= "null"){
-         Swal.fire({
-            icon: "success",
-            title: "User already exist",
-            text: msg,
-            timer: 2000,
-            showConfirmButton: false
+    const msg = document.getElementById("checkMsg").dataset.message;
+    if (msg && msg != "null") {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'User already exists!',
+            confirmButtonColor: '#d33'
         });
     }
 </script>
