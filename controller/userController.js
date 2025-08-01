@@ -40,8 +40,6 @@ const login = async (req, res) => {
         }
         const isMatch = await bcrypt.compare(password, user.password);
         console.log("password match: ",isMatch);
-        
-
 
         if (!isMatch) return res.render("user/login", { message: "password incorrect" });
         

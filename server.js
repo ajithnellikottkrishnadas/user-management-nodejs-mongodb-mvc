@@ -6,15 +6,16 @@ import {fileURLToPath} from "url";
 import { dirname } from "path";
 import path from "path";
 import connectDB from "./db/connectDB.js";
+
 import nocache from "nocache";
 import session from "express-session";
 
 const app= express();
 const port = 3000;
 
+connectDB();
+
 const __dirname= dirname(fileURLToPath(import.meta.url));
-
-
 
 app.use(express.urlencoded({ extended: true })); 
 app.use(express.json())
@@ -40,7 +41,6 @@ app.get("/",(req,res)=>{
     res.send("HEllo world");
 })
 
-connectDB();
 
 app.use("/user", userRoutes);
 app.use("/admin", adminRoutes);
