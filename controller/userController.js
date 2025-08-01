@@ -45,8 +45,8 @@ const login = async (req, res) => {
 
         if (!isMatch) return res.render("user/login", { message: "password incorrect" });
         
-
-        res.render("user/home", { message: "login successfull" });
+        req.session.user=true;
+        res.render("user/userHome", { message: "login successfull" });
 
     } catch (error) {
 
@@ -61,7 +61,16 @@ const loadRegister = (req, res) => {
 }
 
 const loadLogin = (req, res) => {
-    res.render("user/login")
+    res.render("user/login");
 }
 
-export { loadRegister, loadLogin, registerUser, login };
+const loadHome= (req,res)=>{
+    res.render("user/userHome");
+}
+
+const logout= (req,res)=>{
+    req.session.user=null;
+    res.render("user/login");
+}
+
+export { loadRegister, loadLogin, registerUser, login , loadHome, logout };
