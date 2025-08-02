@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="/styles/adminLogin.css">
+<div class="login">
+  <h1>Admin Login</h1>
+  <form id="adminLog" method="post" action="/admin/login">
+    <div id="adminMsgBox" data-message="{{message}}"></div>
+    <input type="text" name="email" id="email" placeholder="Admin Email"  />
+    <input type="password" name="password" id="password" placeholder="Password"  />
+    <button type="submit" class="btn btn-primary btn-block btn-large">Admin Login</button>
+    <div class="link">
+      <div><a href="/user/login">Go to User Login</a></div>
+    </div>
+  </form>
+</div>
+
+<script>
+  document.getElementById("adminLog").addEventListener("submit", function adminFormValidation(e) {
+
+    
+    const email= document.getElementById("email").value.trim();
+    const password= document.getElementById("password").value.trim();
+
+    if (email === "" || password === "") {
+      e.preventDefault();
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "All fields are required!"
+      });
+      return false;
+    }
+    e.target.submit();
+
+  })
+</script>
+<script>
+    const msg = document.getElementById("adminMsgBox").dataset.message;
+    if (msg && msg != "null") {
+        Swal.fire({
+            icon: "error",
+            title:msg,
+            timer: 2000,
+            showConfirmButton: false
+        });
+    } 
+</script>

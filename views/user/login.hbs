@@ -3,8 +3,8 @@
     <h1>Login</h1>
     <form id="log" method="post" action="/user/login">
         <div type="text" id="checkMsg3" data-message="{{message}}"></div>
-        <input type="text" name="email" id="email" placeholder="Email" required="required" />
-        <input type="password" name="password" id="password" placeholder="Password" required="required" />
+        <input type="text" name="email" id="email" placeholder="Email" />
+        <input type="password" name="password" id="password" placeholder="Password"  />
         <button type="submit" class="btn btn-primary btn-block btn-large">Login</button>
         <div class="link">
             <div><a href="">Forgot password</a></div>
@@ -16,7 +16,7 @@
 
 <script>
     const msg = document.getElementById("checkMsg3").dataset.message;
-    if (msg && msg != "null" && msg==="user created successfully" ) {
+    if (msg && msg != "null" && msg === "user created successfully") {
         Swal.fire({
             icon: "success",
             title: "Registration Successful",
@@ -24,7 +24,7 @@
             timer: 2000,
             showConfirmButton: false
         });
-    }else if (msg && msg != "null" && msg==="password incorrect" ) {
+    } else if (msg && msg != "null" && msg === "password incorrect") {
         Swal.fire({
             icon: "success",
             title: "Went wrong",
@@ -32,7 +32,7 @@
             timer: 2000,
             showConfirmButton: false
         });
-    }else if (msg && msg != "null" && msg==="login successfull" ) {
+    } else if (msg && msg != "null" && msg === "login successfull") {
         Swal.fire({
             icon: "success",
             title: "login successfull",
@@ -48,13 +48,15 @@
     document.getElementById("log").addEventListener("submit", function formValidation(e) {
 
         e.preventDefault();
-       
-        if (email === "" || password === "" ) {
+
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        if (email === "" || password === "") {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "All fields are required!",
-                footer: '<a href="#">Why do I have this issue?</a>'
+                text: "All fields are required!"
             });
             return false;
         }

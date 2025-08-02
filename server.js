@@ -15,16 +15,6 @@ const port = 3000;
 
 connectDB();
 
-const __dirname= dirname(fileURLToPath(import.meta.url));
-
-app.use(express.urlencoded({ extended: true })); 
-app.use(express.json())
-
-app.use(express.static(path.join(__dirname, "public")));
-app.set("views", path.join( __dirname, "views"))
-app.set("view engine", "hbs");
-
-
 app.use(nocache());
 app.use(session({
     secret: "mysecretkey",
@@ -34,6 +24,15 @@ app.use(session({
         maxAge:1000*60*60*24
     }
 }))
+
+const __dirname= dirname(fileURLToPath(import.meta.url));
+
+app.use(express.urlencoded({ extended: true })); 
+app.use(express.json())
+
+app.use(express.static(path.join(__dirname, "public")));
+app.set("views", path.join( __dirname, "views"))
+app.set("view engine", "hbs");
 
 
 
