@@ -1,6 +1,4 @@
-
-
-const checkSession=(req,res,next)=>{
+const userCheckSession=(req,res,next)=>{
     if(req.session.user){
         next();
     } else{
@@ -8,7 +6,7 @@ const checkSession=(req,res,next)=>{
     }
 }
 
-const isLogin=(req,res,next)=>{
+const isUserLogin=(req,res,next)=>{
     if (req.session.user) {
         res.redirect("/user/userHome")
     } else {
@@ -16,4 +14,24 @@ const isLogin=(req,res,next)=>{
     }
 }
 
-export { isLogin, checkSession};
+const adminCheckSession=(req,res,next)=>{
+
+    if(req.session.admin){
+        next();
+    }else{
+        res.redirect("/admin/login");
+    }
+
+}
+
+const isAdminLogin=(req,res,next)=>{
+
+    if(req.session.admin){
+        res.redirect("/admin/dashboard")
+    }else{
+        next();
+    }
+
+}
+
+export { isUserLogin, userCheckSession,isAdminLogin,adminCheckSession};

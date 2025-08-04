@@ -1,4 +1,4 @@
-import userSchema from "../model/userModel.js"
+import userModel from "../model/userModel.js"
 import bcrypt, { compare } from "bcryptjs"
 const saltround = 10;
 
@@ -8,13 +8,13 @@ const registerUser = async (req, res) => {
         const { email, password } = req.body;
 
         const hashedPassword = await bcrypt.hash(password, saltround)
-        const userCheck = await userSchema.findOne({ email });
+        const userCheck = await userModel.findOne({ email });
         console.log("aaaa");
 
         if (userCheck) {
             return res.render("user/register", { message: `user already exist` });
         } else {
-            const newUser = new userSchema({
+            const newUser = new userModel({
                 email,
                 password: hashedPassword
             });
@@ -32,7 +32,7 @@ const login = async (req, res) => {
     try {
 
         const { email, password } = req.body;
-        const user = await userSchema.findOne({ email });
+        const user = await userModel.findOne({ email });
         if (!user) {
             console.log("user not found 11");
             

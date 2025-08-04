@@ -1,3 +1,54 @@
-<div>
-    <h1>hhhh</h1>
+<link rel="stylesheet" href="/styles/dash.css">
+<header>
+    <h1>Admin Dashboard</h1>
+    <form action="/admin/logout" method="POST">
+        <button type="submit" class="logout-btn">Logout</button>
+    </form>
+</header>
+<div class="card-container">
+    {{#each users}}
+    <div class="card">
+        <p class="email">{{this.email}}</p>
+        <button class="editbn" onclick="openUser('{{this._id}}', '{{this.email}}')">Edit</button>
+        <form id="deleteForm-{{this._id}}" method="POST" action="/admin/delete/{{this._id}}"  onsubmit="return confirm('Are you sure you want to delete this user?');">
+            <button class="deletebn" onclick="deleteUser('{{this._id}}')">Delete</button>
+        </form>
+    </div>
+    {{/each}}
 </div>
+
+<div class="userCard" id="editUser">
+    <div class="userCard-content">
+        <form id="editForm" method="POST">
+            <button type="button" class="close-btn" onclick="closeUser()">X</button>
+            <input type="hidden" name="id" id="userId">
+            <label>Email:</label>
+            <input type="text" name="email" id="editEmail">
+            <label>New Password:</label>
+            <input type="text" name="password" id="editPassword">
+            <button type="submit" class="save-btn">Save</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function openUser(id, email) {
+        document.getElementById("editUser").style.display = "flex";
+        document.getElementById("userId").value = id;
+        document.getElementById("editEmail").value = email;
+        document.getElementById("editForm").action = "/admin/update/" + id;
+    }
+
+    function closeUser() {
+        document.getElementById("editUser").style.display = "none";
+    }
+
+</script>
+<script>
+    function deleteUser(id) {
+        
+          document.getElementById("deleteId").value=id;
+          document.getElementById("deleteForm").action="/admin/delete/"+id;
+
+    }
+</script>
